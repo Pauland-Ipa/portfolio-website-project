@@ -1,21 +1,51 @@
 /* 1. Variables & Reset */
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2c3e50;
-    --bg-color: #ffffff;
-    --bg-light: #f4f4f4;
-    --text-color: #333333;
-    --card-bg: #ffffff;
-    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    /* --- NEW EARTHY PALETTE --- */
+    
+    /* Primary: Terracotta (Buttons, Highlights) */
+    --primary-color: #AF734A; 
+    
+    /* Secondary: Dark Coffee (Headings, Navbar, Footer) */
+    --secondary-color: #3B271D; 
+    
+    /* Background: Cream (Main Page Background) */
+    --bg-color: #FFFAF1; 
+    
+    /* Light BG: Beige (Projects Section Background) */
+    --bg-light: #EFE0BB; 
+    
+    /* Text: Dark Coffee (Body Text) */
+    --text-color: #3B271D; 
+    
+    /* Card BG: Pure White */
+    --card-bg: #FFFFFF; 
+    
+    /* Shadow: Warm shadow */
+    --shadow: 0 4px 6px rgba(59, 39, 29, 0.15); 
+    
     --transition: all 0.3s ease;
 }
 
+/* --- THEMED DARK MODE --- */
 [data-theme="dark"] {
-    --bg-color: #1a1a1a;
-    --bg-light: #2d2d2d;
-    --text-color: #f4f4f4;
-    --card-bg: #333333;
-    --secondary-color: #ecf0f1;
+    /* Background becomes Darker Coffee */
+    --bg-color: #2A1C15;
+    
+    /* Section BG becomes the Palette Coffee */
+    --bg-light: #3B271D; 
+    
+    /* Text becomes Cream */
+    --text-color: #FFFAF1; 
+    
+    /* Cards become dark brown */
+    --card-bg: #3B271D; 
+    
+    /* Secondary elements become Gold/Tan */
+    --secondary-color: #C7934E; 
+    
+    /* Primary switches to Gold/Tan for better contrast in dark mode */
+    --primary-color: #C7934E; 
+    
     --shadow: 0 4px 6px rgba(0,0,0,0.5);
 }
 
@@ -70,7 +100,7 @@ a {
 }
 
 .primary-btn:hover {
-    background: #2980b9;
+    background: #A05E2B; /* Darker Rust color on hover */
 }
 
 .secondary-btn {
@@ -80,7 +110,11 @@ a {
 
 .secondary-btn:hover {
     background: var(--primary-color);
-    color: #fff;
+    color: #fff; /* White text on hover for contrast */
+}
+
+[data-theme="dark"] .secondary-btn:hover {
+    color: #2A1C15; /* Dark text on gold button in dark mode */
 }
 
 button:focus, a:focus, input:focus, textarea:focus {
@@ -114,7 +148,7 @@ header {
 .nav-links {
     display: flex;
     list-style: none;
-    align-items: center; /* Ensures button aligns with text */
+    align-items: center;
 }
 
 .nav-links li {
@@ -145,7 +179,6 @@ header {
     font-size: 1.2rem;
     color: var(--text-color);
     cursor: pointer;
-    /* Removed extra margin so it fits in the list perfectly */
 }
 
 /* 4. Hero Section */
@@ -185,6 +218,7 @@ header {
     font-size: 2.5rem;
     margin-bottom: 3rem;
     position: relative;
+    color: var(--secondary-color);
 }
 
 /* 6. About Section */
@@ -208,6 +242,10 @@ header {
     border-radius: 5px;
     margin-right: 5px;
     font-size: 0.9rem;
+}
+
+[data-theme="dark"] .skill-tag {
+    color: #2A1C15; /* Dark text on gold tag for readability */
 }
 
 /* 7. Projects Section */
@@ -260,7 +298,7 @@ input, textarea {
 }
 
 .error-msg {
-    color: #e74c3c;
+    color: #e74c3c; /* Standard error red */
     font-size: 0.85rem;
     display: block;
     margin-top: 5px;
@@ -273,7 +311,7 @@ input, textarea {
 /* 9. Footer */
 footer {
     background: var(--secondary-color);
-    color: #fff;
+    color: #fff; /* Keeps footer text white on dark coffee */
     padding: 20px 0;
     text-align: center;
     position: relative;
@@ -290,13 +328,17 @@ footer {
     bottom: 30px;
     right: 30px;
     background: var(--primary-color);
-    color: white;
+    color: #fff;
     border: none;
     padding: 15px;
     border-radius: 50%;
     cursor: pointer;
     display: none;
     box-shadow: var(--shadow);
+}
+
+[data-theme="dark"] #back-to-top {
+    color: #2A1C15; /* Dark arrow on gold button */
 }
 
 /* 10. Animation Utility */
