@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // FEATURE 3: Typing Text Effect
     const textElement = document.querySelector('.typing-text');
-    const words = ["Multimedia Computing Student", "UI/UX Designer", "Multimedia Artist"];
+    const words = ["Multimedia Computing Student", "UI/UX Designer", "Computer Science Enthusiast"];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
