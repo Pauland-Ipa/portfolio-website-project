@@ -1,24 +1,22 @@
 /* 1. Variables & Reset */
 :root {
-    /* --- EARTHY PALETTE (Light Mode) --- */
-    --primary-color: #AF734A; /* Terracotta */
-    --secondary-color: #3B271D; /* Dark Coffee */
-    --bg-color: #FFFAF1; /* Cream */
-    --bg-light: #EFE0BB; /* Beige */
-    --text-color: #3B271D; /* Dark Coffee */
-    --card-bg: #FFFFFF; /* White */
-    --shadow: 0 4px 6px rgba(59, 39, 29, 0.15); /* Warm Shadow */
+    --primary-color: #AF734A; 
+    --secondary-color: #3B271D; 
+    --bg-color: #FFFAF1; 
+    --bg-light: #EFE0BB; 
+    --text-color: #3B271D; 
+    --card-bg: #FFFFFF; 
+    --shadow: 0 4px 6px rgba(59, 39, 29, 0.15); 
     --transition: all 0.3s ease;
 }
 
 [data-theme="dark"] {
-    /* --- DARK MODE PALETTE --- */
-    --bg-color: #2A1C15; /* Darker Coffee */
-    --bg-light: #3B271D; /* Coffee */
-    --text-color: #FFFAF1; /* Cream Text */
-    --card-bg: #3B271D; /* Coffee Card */
-    --secondary-color: #C7934E; /* Gold/Tan */
-    --primary-color: #C7934E; /* Gold/Tan */
+    --bg-color: #2A1C15;
+    --bg-light: #3B271D; 
+    --text-color: #FFFAF1; 
+    --card-bg: #3B271D; 
+    --secondary-color: #C7934E; 
+    --primary-color: #C7934E; 
     --shadow: 0 4px 6px rgba(0,0,0,0.5);
 }
 
@@ -40,62 +38,7 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* 2. Typography & Utilities */
-h1, h2, h3 {
-    margin-bottom: 1rem;
-    color: var(--secondary-color);
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: var(--transition);
-    font-weight: bold;
-}
-
-.primary-btn {
-    background: var(--primary-color);
-    color: #fff;
-    border: none;
-}
-
-.primary-btn:hover {
-    background: #A05E2B; /* Darker Rust */
-}
-
-.secondary-btn {
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-}
-
-.secondary-btn:hover {
-    background: var(--primary-color);
-    color: #fff;
-}
-
-[data-theme="dark"] .secondary-btn:hover {
-    color: #2A1C15; /* Dark text on gold button */
-}
-
-button:focus, a:focus, input:focus, textarea:focus {
-    outline: 3px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* 3. Header & Navigation */
+/* 2. Header & Navigation */
 header {
     background: var(--bg-color);
     box-shadow: var(--shadow);
@@ -154,32 +97,53 @@ header {
     cursor: pointer;
 }
 
-/* 4. Hero Section */
+/* 3. Hero Section (Video Background) */
 .hero {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 60px;
+    position: relative; 
+    overflow: hidden; 
+    color: #fff; 
 }
 
-.hero h1 {
-    font-size: 3rem;
+#hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2; 
+    transform: translate(-50%, -50%);
+    object-fit: cover;
 }
 
-.hero p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(59, 39, 29, 0.5); 
+    z-index: -1; 
 }
 
-.highlight {
-    color: var(--primary-color);
+.hero-content {
+    z-index: 1; 
 }
 
-/* 5. Sections General */
+.hero h1, .hero p {
+    color: #fff !important; 
+}
+
+/* 4. Content Sections */
 .section {
     padding: 80px 0;
+    background-color: var(--bg-color);
 }
 
 .bg-light {
@@ -190,11 +154,9 @@ header {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    position: relative;
     color: var(--secondary-color);
 }
 
-/* 6. About Section */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -217,11 +179,6 @@ header {
     font-size: 0.9rem;
 }
 
-[data-theme="dark"] .skill-tag {
-    color: #2A1C15;
-}
-
-/* 7. Projects Section */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -250,43 +207,48 @@ header {
     padding: 20px;
 }
 
-/* 8. Contact Section */
-.contact-container {
-    max-width: 600px;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
     border-radius: 5px;
-    background: var(--bg-color);
-    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: bold;
 }
 
-.direct-contact {
-    margin-top: 20px;
+.primary-btn {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
 }
 
-/* 9. Footer */
+.secondary-btn {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.secondary-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* 5. Footer & Utilities */
 footer {
     background: var(--secondary-color);
     color: #fff;
     padding: 20px 0;
     text-align: center;
-    position: relative;
 }
 
-.social-links a {
-    color: #fff;
-    margin: 0 10px;
-    font-size: 1.2rem;
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 #back-to-top {
@@ -300,58 +262,34 @@ footer {
     border-radius: 50%;
     cursor: pointer;
     display: none;
-    box-shadow: var(--shadow);
 }
 
-[data-theme="dark"] #back-to-top {
-    color: #2A1C15;
-}
-
-/* 10. Animation Utility */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 11. Mobile Responsiveness */
+/* 6. Mobile Responsiveness */
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
-        /* Force the button to push to the far right */
         margin-left: auto; 
     }
 
-    /* FIX: This removes invisible space blocking the button */
     nav {
         width: 0;
         overflow: visible;
     }
 
     .nav-links {
+        display: none;
+        flex-direction: column;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
         background: var(--bg-color);
-        flex-direction: column;
-        display: none; /* Hidden on mobile by default */
         box-shadow: var(--shadow);
         padding: 20px 0;
     }
 
     .nav-links.active {
         display: flex;
-    }
-
-    .nav-links li {
-        margin: 15px 0;
-        text-align: center;
     }
 
     .about-grid {
