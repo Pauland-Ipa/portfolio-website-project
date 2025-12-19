@@ -10,17 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.setAttribute('aria-expanded', isExpanded);
     });
 
-    // FEATURE 2: Dark Mode Toggle
+    // FEATURE 2: Dark Mode with PERSISTENCE (Stays after refresh)
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
     const icon = themeToggle.querySelector('i');
 
+    // 1. Check if user already has a theme saved
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         body.setAttribute('data-theme', 'dark');
         icon.classList.replace('fa-moon', 'fa-sun');
     }
 
+    // 2. Toggle theme and save the choice
     themeToggle.addEventListener('click', () => {
         if (body.hasAttribute('data-theme')) {
             body.removeAttribute('data-theme');
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // FEATURE 3: Typing Text Effect
     const textElement = document.querySelector('.typing-text');
-    const words = ["Web Developer", "UI/UX Designer", "Multimedia Artist"];
+    const words = ["CS Student", "UI/UX Designer", "Multimedia Artist"];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -120,39 +122,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // FEATURE 8: Contact Form Validation
+    // FEATURE 8: Contact Form Validation with POP-UPS
     const form = document.getElementById('contact-form');
-    const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
 
     form.addEventListener('submit', (e) => {
-        e.preventDefault(); 
-        let isValid = true;
+        e.preventDefault(); // Stop the form from actually sending
 
-        document.querySelectorAll('.error-msg').forEach(el => el.textContent = '');
+        // 1. Check Email Validity
+        const emailValue = emailInput.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (nameInput.value.trim() === '') {
-            document.getElementById('name-error').textContent = 'Name is required';
-            isValid = false;
+        if (!emailPattern.test(emailValue)) {
+            // ERROR POP-UP
+            alert("Error: Please enter a valid email address.");
+            return; // Stop here
         }
 
-        if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-            document.getElementById('email-error').textContent = 'Valid email is required';
-            isValid = false;
-        }
-
-        if (messageInput.value.trim() === '') {
-            document.getElementById('message-error').textContent = 'Message is required';
-            isValid = false;
-        }
-
-        if (isValid) {
-            const statusBtn = document.getElementById('form-status');
-            statusBtn.textContent = 'Message Sent Successfully! (Demo)';
-            statusBtn.style.color = 'green';
-            form.reset();
-            setTimeout(() => statusBtn.textContent = '', 3000);
-        }
+        // 2. If email is good, show success POP-UP
+        alert("Successfully sent!");
+        
+        // Optional: clear form after sending
+        form.reset(); 
     });
 });
