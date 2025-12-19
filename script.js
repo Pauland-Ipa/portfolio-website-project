@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mobile Toggle
+    // 1. Mobile Menu
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-    // 2. Dark Mode Persistent
+    // 2. Dark Mode Preference
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
     if (localStorage.getItem('theme') === 'dark') body.setAttribute('data-theme', 'dark');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     type();
 
-    // 4. Contact Form Validation Pop-ups
+    // 4. Contact Form Alerts
     const form = document.getElementById('contact-form');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -46,10 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 5. Scroll Reveal & Back to Top
+    // 5. Scroll Reveal
     const reveals = document.querySelectorAll('.reveal');
     window.addEventListener('scroll', () => {
-        reveals.forEach(r => { if(r.getBoundingClientRect().top < window.innerHeight - 150) r.classList.add('active'); });
+        reveals.forEach(r => { 
+            if(r.getBoundingClientRect().top < window.innerHeight - 150) r.classList.add('active'); 
+        });
         document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'block' : 'none';
     });
     document.getElementById('back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
