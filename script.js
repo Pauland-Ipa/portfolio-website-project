@@ -1,59 +1,148 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mobile Menu
+    
+    // FEATURE 1: Mobile Navigation Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-    // 2. Dark Mode Preference
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const isExpanded = navLinks.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', isExpanded);
+    });
+
+    // FEATURE 2: Dark Mode with PERSISTENCE (Stays after refresh)
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
-    if (localStorage.getItem('theme') === 'dark') body.setAttribute('data-theme', 'dark');
+    const icon = themeToggle.querySelector('i');
 
+    // 1. Check if user already has a theme saved
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        icon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // 2. Toggle theme and save the choice
     themeToggle.addEventListener('click', () => {
         if (body.hasAttribute('data-theme')) {
             body.removeAttribute('data-theme');
+            icon.classList.replace('fa-sun', 'fa-moon');
             localStorage.setItem('theme', 'light');
         } else {
             body.setAttribute('data-theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
             localStorage.setItem('theme', 'dark');
         }
     });
 
-    // 3. Typing Effect
+    // FEATURE 3: Typing Text Effect
     const textElement = document.querySelector('.typing-text');
-    const words = ["Multimedia Computing Student", "UI/UX Designer", "Multimedia Artist"];
-    let wordIndex = 0, charIndex = 0, isDeleting = false;
+    const words = ["CS Student", "UI/UX Designer", "Multimedia Artist"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
     function type() {
         const currentWord = words[wordIndex];
-        textElement.textContent = isDeleting ? currentWord.substring(0, charIndex--) : currentWord.substring(0, charIndex++);
-        if (!isDeleting && charIndex > currentWord.length) { isDeleting = true; setTimeout(type, 2000); }
-        else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; setTimeout(type, 500); }
-        else { setTimeout(type, isDeleting ? 100 : 200); }
+        
+        if (isDeleting) {
+            textElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            textElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        if (!isDeleting && charIndex === currentWord.length) {
+            isDeleting = true;
+            setTimeout(type, 2000); 
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            setTimeout(type, 500); 
+        } else {
+            setTimeout(type, isDeleting ? 100 : 200);
+        }
     }
     type();
 
-    // 4. Contact Form Alerts
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value.trim();
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            alert("Error: Please enter a valid email address.");
+    // FEATURE 4: Dynamic Copyright Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // FEATURE 5: Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+        const windowHeight = window.innerHeight;
+        const elementVisible = 150;
+
+        revealElements.forEach((reveal) => {
+            const elementTop = reveal.getBoundingClientRect().top;
+            if (elementTop < windowHeight - elementVisible) {
+                reveal.classList.add('active');
+            }
+        });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+
+    // FEATURE 6: Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.style.display = 'block';
         } else {
-            alert("Successfully sent!");
-            form.reset();
+            backToTopBtn.style.display = 'none';
         }
     });
 
-    // 5. Scroll Reveal
-    const reveals = document.querySelectorAll('.reveal');
-    window.addEventListener('scroll', () => {
-        reveals.forEach(r => { 
-            if(r.getBoundingClientRect().top < window.innerHeight - 150) r.classList.add('active'); 
-        });
-        document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'block' : 'none';
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    document.getElementById('back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // FEATURE 7: Active Link Highlight on Scroll
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(li => {
+            li.classList.remove('active');
+            if (li.getAttribute('href').includes(current)) {
+                li.classList.add('active');
+            }
+        });
+    });
+
+    // FEATURE 8: Contact Form Validation with POP-UPS
+    const form = document.getElementById('contact-form');
+    const emailInput = document.getElementById('email');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Stop the form from actually sending
+
+        // 1. Check Email Validity
+        const emailValue = emailInput.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(emailValue)) {
+            // ERROR POP-UP
+            alert("Error: Please enter a valid email address.");
+            return; // Stop here
+        }
+
+        // 2. If email is good, show success POP-UP
+        alert("Successfully sent!");
+        
+        // Optional: clear form after sending
+        form.reset(); 
+    });
 });
