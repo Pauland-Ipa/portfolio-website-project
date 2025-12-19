@@ -1,51 +1,22 @@
 /* 1. Variables & Reset */
 :root {
-    /* --- NEW EARTHY PALETTE --- */
-    
-    /* Primary: Terracotta (Buttons, Highlights) */
     --primary-color: #AF734A; 
-    
-    /* Secondary: Dark Coffee (Headings, Navbar, Footer) */
     --secondary-color: #3B271D; 
-    
-    /* Background: Cream (Main Page Background) */
     --bg-color: #FFFAF1; 
-    
-    /* Light BG: Beige (Projects Section Background) */
     --bg-light: #EFE0BB; 
-    
-    /* Text: Dark Coffee (Body Text) */
     --text-color: #3B271D; 
-    
-    /* Card BG: Pure White */
     --card-bg: #FFFFFF; 
-    
-    /* Shadow: Warm shadow */
     --shadow: 0 4px 6px rgba(59, 39, 29, 0.15); 
-    
     --transition: all 0.3s ease;
 }
 
-/* --- THEMED DARK MODE --- */
 [data-theme="dark"] {
-    /* Background becomes Darker Coffee */
     --bg-color: #2A1C15;
-    
-    /* Section BG becomes the Palette Coffee */
     --bg-light: #3B271D; 
-    
-    /* Text becomes Cream */
     --text-color: #FFFAF1; 
-    
-    /* Cards become dark brown */
     --card-bg: #3B271D; 
-    
-    /* Secondary elements become Gold/Tan */
     --secondary-color: #C7934E; 
-    
-    /* Primary switches to Gold/Tan for better contrast in dark mode */
     --primary-color: #C7934E; 
-    
     --shadow: 0 4px 6px rgba(0,0,0,0.5);
 }
 
@@ -67,7 +38,6 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* 2. Typography & Utilities */
 h1, h2, h3 {
     margin-bottom: 1rem;
     color: var(--secondary-color);
@@ -100,7 +70,7 @@ a {
 }
 
 .primary-btn:hover {
-    background: #A05E2B; /* Darker Rust color on hover */
+    background: #A05E2B;
 }
 
 .secondary-btn {
@@ -110,11 +80,11 @@ a {
 
 .secondary-btn:hover {
     background: var(--primary-color);
-    color: #fff; /* White text on hover for contrast */
+    color: #fff;
 }
 
 [data-theme="dark"] .secondary-btn:hover {
-    color: #2A1C15; /* Dark text on gold button in dark mode */
+    color: #2A1C15;
 }
 
 button:focus, a:focus, input:focus, textarea:focus {
@@ -122,7 +92,6 @@ button:focus, a:focus, input:focus, textarea:focus {
     outline-offset: 2px;
 }
 
-/* 3. Header & Navigation */
 header {
     background: var(--bg-color);
     box-shadow: var(--shadow);
@@ -181,7 +150,6 @@ header {
     cursor: pointer;
 }
 
-/* 4. Hero Section */
 .hero {
     height: 100vh;
     display: flex;
@@ -204,7 +172,6 @@ header {
     color: var(--primary-color);
 }
 
-/* 5. Sections General */
 .section {
     padding: 80px 0;
 }
@@ -221,7 +188,6 @@ header {
     color: var(--secondary-color);
 }
 
-/* 6. About Section */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -245,10 +211,9 @@ header {
 }
 
 [data-theme="dark"] .skill-tag {
-    color: #2A1C15; /* Dark text on gold tag for readability */
+    color: #2A1C15;
 }
 
-/* 7. Projects Section */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -277,7 +242,6 @@ header {
     padding: 20px;
 }
 
-/* 8. Contact Section */
 .contact-container {
     max-width: 600px;
     text-align: center;
@@ -297,21 +261,13 @@ input, textarea {
     color: var(--text-color);
 }
 
-.error-msg {
-    color: #e74c3c; /* Standard error red */
-    font-size: 0.85rem;
-    display: block;
-    margin-top: 5px;
-}
-
 .direct-contact {
     margin-top: 20px;
 }
 
-/* 9. Footer */
 footer {
     background: var(--secondary-color);
-    color: #fff; /* Keeps footer text white on dark coffee */
+    color: #fff;
     padding: 20px 0;
     text-align: center;
     position: relative;
@@ -338,10 +294,9 @@ footer {
 }
 
 [data-theme="dark"] #back-to-top {
-    color: #2A1C15; /* Dark arrow on gold button */
+    color: #2A1C15;
 }
 
-/* 10. Animation Utility */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -353,7 +308,7 @@ footer {
     transform: translateY(0);
 }
 
-/* 11. Mobile Responsiveness */
+/* MOBILE RESPONSIVE STYLES */
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
